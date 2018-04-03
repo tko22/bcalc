@@ -5,7 +5,8 @@ version="0.1.0"
 usage() {
   cat <<EOF
 
-  Convert hex <-> decimal numbers. Prefix "0x" and use Uppercase for a hex number. Ex: 0xA
+  Convert hex <-> decimal numbers. Prefix "0x" and use Uppercase for a hex number or it won't work. 
+    Ex: 0xA
 
   Usage: bcalc [number]
 
@@ -39,20 +40,22 @@ then
   usage
   exit 1
 fi
-
+hex_prefix="0x"
 # check if it's a hex number
-if [[ ${args:0:2} = "0x" ]];
+if [[ ${args:0:2} = $hex_prefix ]];
 then
   # hex
-  conversion="decimal"
+  conversion_text="decimal"
   num=$(echo "${args#*x }" | cut -d "x" -f2)  # parse "0x"
   convert=$(bc <<< "ibase=16;$num")
-  
 else
-  conversion="hex"
-  convert=$(bc <<< "obase=16;$args")
+  conversion_text="hex"
+  convert=$hex_prefix
+  convert+=$(bc <<< "obase=16;$args");
+  
+  
 fi
 echo ""
-echo "\033[90m … Converting $args to $conversion. \033[39m"
+echo "\033[90m … Converting $args to $conversion_text \033[39m"
 echo "\033[96m ✓ $convert \033[39m"
 
