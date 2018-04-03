@@ -8,7 +8,7 @@ usage() {
   Convert hex <-> decimal numbers. Prefix "0x" and use Uppercase for a hex number or it won't work. 
     Ex: 0xA
 
-  Usage: bcalc [number]
+  Usage: bcalc <number>
 
   Options:
     -V, --version    Show version.
