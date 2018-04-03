@@ -10,7 +10,6 @@ usage() {
   Options:
     -V, --version    Output version
     -h, --help       This message.
-    --               End of options
 
 EOF
 }
@@ -29,14 +28,29 @@ while [[ "$1" =~ ^- && ! "$1" == "--" ]]; do
   shift
 done
 
+# get arguments
 args="$@"
 
-if [ "" == "$args" ]; then
+# check if only 1 arg was passed
+if (( $# != 1 ))
+then
   usage
   exit 1
 fi
 
+# check if it's a hex number
+if [[ ${args:0:2} = "0x" ]];
+then
+  # hex
+  conversion="decimal"
+  num=$(echo "${args#*x }" | cut -d "x" -f2)  # parse "0x"
+  convert=$(bc <<< "ibase=16;$num")
+  
+else
+  conversion="hex"
+  convert=$(bc <<< "obase=16;$args")
+fi
 echo ""
-
-echo "\033[90m … getting password for \"$args\". \033[39m"
+echo "\033[90m … Converting $args to $conversion. \033[39m"
+echo "\033[96m ✓ $convert \033[39m"
 
