@@ -5,11 +5,13 @@ version="0.1.0"
 usage() {
   cat <<EOF
 
+  Convert hex <-> decimal numbers. Prefix "0x" and use Uppercase for a hex number. Ex: 0xA
+
   Usage: bcalc [number]
 
   Options:
-    -V, --version    Output version
-    -h, --help       This message.
+    -V, --version    Show version.
+    -h, --help       Show this screen.
 
 EOF
 }
