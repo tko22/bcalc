@@ -56,6 +56,6 @@ else
   
 fi
 echo ""
-echo "\033[90m … Converting $args to $conversion_text \033[39m"
-echo "\033[96m ✓ $convert \033[39m"
-
+echo "\033[90m   … Converting $args to $conversion_text \033[39m"
+echo "\033[96m   ✓ $convert \033[39m"
+echo ""
