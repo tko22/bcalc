@@ -47,7 +47,8 @@ then
   # hex
   conversion_text="decimal"
   num=$(echo "${args#*x }" | cut -d "x" -f2)  # parse "0x"
-  convert=$(bc <<< "ibase=16;$num")
+  uppertext=$(echo "$num" | tr '[:lower:]' '[:upper:]') # make uppercase
+  convert=$(bc <<< "ibase=16;$uppertext")
 else
   conversion_text="hex"
   convert=$hex_prefix
